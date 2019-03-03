@@ -1,0 +1,10 @@
+<h1>Add a cocktail</h1>
+<p>What is the name of the cocktail?</p>
+
+<%= simple_form_for [@cocktail] do |f| %>
+  <%= f.input :name %>
+  <%= f.submit "Add cocktail" %>
+<% end %>
+
+<p>What are the ingredients of the cocktail?</p>
+<p>What are the doses of the cocktail?</p>

@@ -1,0 +1,58 @@
+<% content_for(:title) do %>
+<%= @cocktail.name %>
+<% end %>
+<!-- <% content_for(:description) do %>
+<%= @cocktail.name %>
+<% end %>
+<% content_for(:og_image) do %>
+<%= @cocktail.name %>
+<% end %>
+ -->
+
+<h1><%= @cocktail.name %> </h1>
+<p> <%= link_to 'Overview page', cocktails_path %></p>
+
+<ul>
+	<% @cocktail.doses.each do |dose| %>
+	<li><%= dose.ingredient.name %> <%= dose.description %>
+		<%= link_to "delete", cocktail_dose_path(@cocktail.id, dose.id), method: :delete %>
+<!-- 		you can also do cocktail_dose_path(@cocktail, dose) -->
+		<%= @cocktail.id %>
+		<%= link_to "Add review", new_cocktail_dose_path(@cocktail), {class: "btn btn-primary"} %>
+	</li>
+	<% end %>
+</ul>
+
+<!-- RAILS C: 
+cocktail.doses.create(description: "frrw2" , ingredient: Ingredient.all.sample )
+cocktail.ingredients
+cocktail.doses.first.ingredient.name
+-->
+
+<!-- 
+Cocktail.last.doses.create(description: "test", ingredient: Ingredient.all.sample)
+[["description", "test"], ["cocktail_id", 2], ["ingredient_id", 238], ["created_at", "2019-03-02 17:46:38.945362"], ["updated_at", "2019-03-02 17:46:38.945362"]]
+
+Cocktail.last.ingredients -> access to ingredients via cocktail
+=> #<ActiveRecord::Associations::CollectionProxy 
+[#<Ingredient id: 161, name: "Light rum", created_at: "2019-03-02 15:41:01", updated_at: "2019-03-02 15:41:01">, #<Ingredient id: 238, name: "Egg yolk", created_at: "2019-03-02 15:41:01", updated_at: "2019-03-02 15:41:01">]> 
+
+Cocktail.last.doses -> acces to doses via cocktail
+=> #<ActiveRecord::Associations::CollectionProxy 
+[#<Dose id: 1, description: "5 spoons", cocktail_id: 2, ingredient_id: 161, created_at: "2019-03-02 17:04:15", updated_at: "2019-03-02 17:04:15">, 
+#<Dose id: 2, description: "test", cocktail_id: 2, ingredient_id: 238, created_at: "2019-03-02 17:46:38", updated_at: "2019-03-02 17:46:38">]>
+
+Dose.last.ingredient
+=> #<Ingredient id: 238, name: "Egg yolk", created_at: "2019-03-02 15:41:01", updated_at: "2019-03-02 15:41:01">
+
+Dose.last.ingredient.name 
+=> "Egg yolk"
+-->
+
+<!-- Goal = get information on dose and ingredients via cocktail show view
+Cocktail.last.doses -> cocktail has_many :ingredients, through: :doses
+=> #<ActiveRecord::Associations::CollectionProxy [#<Dose id: 1, description: "5 spoons", cocktail_id: 2, ingredient_id: 161, created_at: "2019-03-02 17:04:15", updated_at: "2019-03-02 17:04:15">]>
+
+Can also do Cocktail.last.ingredients :
+=> #<ActiveRecord::Associations::CollectionProxy [#<Ingredient id: 161, name: "Light rum", created_at: "2019-03-02 15:41:01", updated_at: "2019-03-02 15:41:01">]>
+ -->

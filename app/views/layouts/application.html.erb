@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsMisterCocktail2</title>
+    <title> <%= content_for?(:title) ? yield(:title) : "Cocktais" %> </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,8 +12,10 @@
   </head>
 
   <body>
+    <%= render "shared/navbar" %>
     <%= yield %>
       <%= javascript_include_tag "application" %> <!-- from app/assets/javascripts/application.js -->
       <%= javascript_pack_tag "application" %>    <!-- from app/javascript/packs/application.js -->
+    <%= render "shared/footer" %>
   </body>
 </html>
