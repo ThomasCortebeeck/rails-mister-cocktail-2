@@ -3,8 +3,8 @@
 
 <%= simple_form_for [@cocktail] do |f| %>
   <%= f.input :name %>
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden %>
   <%= f.submit "Add cocktail" %>
 <% end %>
 
-<p>What are the ingredients of the cocktail?</p>
-<p>What are the doses of the cocktail?</p>
